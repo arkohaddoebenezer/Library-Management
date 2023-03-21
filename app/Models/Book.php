@@ -10,6 +10,10 @@ class Book extends Model
 {
     use HasFactory;
 
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function path(){
         return "/books".$this->id;
     }
@@ -30,7 +34,7 @@ class Book extends Model
         if(is_null($reservation)){
             throw new \Exception();
         }
-        
+
         $reservation->update([
             'checked_out_at'=>null
         ]);
